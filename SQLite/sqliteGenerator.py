@@ -5,64 +5,64 @@ conn = sqlite3.connect('./gym.db')
 cursor = conn.cursor()
 
 cursor.execute('''
-    CREATE TABLE IF NOT EXISTS Users (
-        UserID INTEGER PRIMARY KEY,
-        Username TEXT NOT NULL,
-        Email TEXT NOT NULL,
-        Password TEXT NOT NULL
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY,
+        username TEXT NOT NULL,
+        email TEXT NOT NULL,
+        password TEXT NOT NULL
     )
 ''')
 
 cursor.execute('''
-    CREATE TABLE IF NOT EXISTS Exercises (
-        ExerciseID INTEGER PRIMARY KEY,
-        Name TEXT NOT NULL,
-        Description TEXT
+    CREATE TABLE IF NOT EXISTS exercises (
+        id INTEGER PRIMARY KEY,
+        name TEXT NOT NULL,
+        description TEXT
     )
 ''')
 
 cursor.execute('''
-    CREATE TABLE IF NOT EXISTS Workouts (
-        WorkoutID INTEGER PRIMARY KEY,
-        User_ID INTEGER NOT NULL,
-        Date TEXT NOT NULL,
-        FOREIGN KEY (User_ID) REFERENCES Users (UserID)
+    CREATE TABLE IF NOT EXISTS workouts (
+        id INTEGER PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        date TEXT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users (id)
     )
 ''')
 
 cursor.execute('''
-    CREATE TABLE IF NOT EXISTS Workout_Exercise (
-        Workout_Exercise_ID INTEGER PRIMARY KEY,
-        Workout_ID INTEGER NOT NULL,
-        Exercise_ID INTEGER NOT NULL,
-        Sets INTEGER NOT NULL,
-        Reps INTEGER NOT NULL,
-        Weight REAL NOT NULL,
-        FOREIGN KEY (Workout_ID) REFERENCES Workouts (WorkoutID),
-        FOREIGN KEY (Exercise_ID) REFERENCES Exercises (ExerciseID)
+    CREATE TABLE IF NOT EXISTS workout_exercise (
+        id INTEGER PRIMARY KEY,
+        workout_ID INTEGER NOT NULL,
+        exercise_ID INTEGER NOT NULL,
+        sets INTEGER NOT NULL,
+        reps INTEGER NOT NULL,
+        weight REAL NOT NULL,
+        FOREIGN KEY (workout_id) REFERENCES workouts (id),
+        FOREIGN KEY (exercise_id) REFERENCES exercises (id)
     )
 ''')
 
 cursor.execute('''
-    CREATE TABLE IF NOT EXISTS Sessions (
-        SessionID INTEGER PRIMARY KEY,
-        User_ID INTEGER NOT NULL,
-        Date TEXT NOT NULL,
-        Duration INTEGER NOT NULL,
-        FOREIGN KEY (User_ID) REFERENCES Users (UserID)
+    CREATE TABLE IF NOT EXISTS sessions (
+        id INTEGER PRIMARY KEY,
+        user_ID INTEGER NOT NULL,
+        date TEXT NOT NULL,
+        duration INTEGER NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users (id)
     )
 ''')
 
 cursor.execute('''
-    CREATE TABLE IF NOT EXISTS Session_Exercise (
-        Session_Exercise_ID INTEGER PRIMARY KEY,
-        Session_ID INTEGER NOT NULL,
-        Exercise_ID INTEGER NOT NULL,
-        Sets INTEGER NOT NULL,
-        Reps INTEGER NOT NULL,
-        Weight REAL NOT NULL,
-        FOREIGN KEY (Session_ID) REFERENCES Sessions (SessionID),
-        FOREIGN KEY (Exercise_ID) REFERENCES Exercises (ExerciseID)
+    CREATE TABLE IF NOT EXISTS session_Exercise (
+        id INTEGER PRIMARY KEY,
+        session_id INTEGER NOT NULL,
+        exercise_id INTEGER NOT NULL,
+        sets INTEGER NOT NULL,
+        reps INTEGER NOT NULL,
+        weight REAL NOT NULL,
+        FOREIGN KEY (session_id) REFERENCES sessions (id),
+        FOREIGN KEY (exercise_id) REFERENCES sxercises (id)
     )
 ''')
 
